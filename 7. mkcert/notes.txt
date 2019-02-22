@@ -1,0 +1,15 @@
+mkcert
+------
+
+See also:
+
+- https://blog.filippo.io/mkcert-valid-https-certificates-for-localhost/
+- https://github.com/FiloSottile/mkcert
+
+
+Download from https://github.com/FiloSottile/mkcert/releases
+
+`mkcert -install`
+
+- root certificate in %localappdata%\mkcert
+- adds to user's Trusted Root

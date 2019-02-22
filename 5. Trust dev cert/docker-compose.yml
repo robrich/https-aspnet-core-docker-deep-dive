@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  web:
+    build: HTTPSPlayground.Web
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    links:
+      - api
+
+# and change home controller's url
+
+  api:
+    build: HTTPSPlayground.API
+    ports:
+      - "4000:4000"
+      - "4001:4001"

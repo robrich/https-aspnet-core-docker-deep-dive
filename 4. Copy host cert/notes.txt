@@ -1,0 +1,9 @@
+Export trusted development certificate from host:
+
+`dotnet dev-certs https --export-path localhost.pfx --password localhost`
+
+Need to set a password to get the private key:
+
+- https://github.com/aspnet/AspNetCore/blob/master/src/Tools/dotnet-dev-certs/src/Program.cs#L207
+- https://github.com/aspnet/AspNetCore/blob/master/src/Shared/CertificateGeneration/CertificateManager.cs#L641
+

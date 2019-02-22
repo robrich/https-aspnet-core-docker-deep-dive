@@ -1,0 +1,17 @@
+﻿@model ICollection<string>
+
+@{
+	ViewBag.Title = "Gently get the list of addresses";
+}
+
+<div class="text-center">
+	<h1 class="display-4">@ViewBag.Title</h1>
+</div>
+
+<div class="container" style="border: 1px solid #cccccc; padding: 1em; margin: 2em auto; max-width: 500px;">
+	<ul>
+		@foreach (string address in Model) {
+			<li>@address</li>
+		}
+	</ul>
+</div>
