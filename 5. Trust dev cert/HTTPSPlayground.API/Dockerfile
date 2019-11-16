@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2-sdk-alpine as build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine as build
 
 WORKDIR /ssl
 COPY ./localhost.pfx .
@@ -22,8 +22,7 @@ COPY . .
 RUN dotnet publish -c Debug -o /dist
 
 
-
-FROM microsoft/dotnet:2.2-aspnetcore-runtime-alpine
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-alpine
 
 COPY --from=build /ssl/localhost.pem /usr/local/share/ca-certificates/localhost.crt
 COPY --from=build /ssl/localhost-nopass.pfx /root/.dotnet/corefx/cryptography/x509stores/my/

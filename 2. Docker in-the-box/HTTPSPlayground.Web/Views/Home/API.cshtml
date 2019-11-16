@@ -1,28 +1,28 @@
 ﻿@model ApiResultModel
 
 @{
-	ViewBag.Title = "Call API";
+    ViewBag.Title = "Call API";
 }
 
 <div class="text-center">
-	<h1 class="display-4">@ViewBag.Title</h1>
+    <h1 class="display-4">@ViewBag.Title</h1>
 </div>
 
 <div class="container" style="border: 1px solid #cccccc; padding: 1em; margin: 2em auto; max-width: 500px;">
-	@if (!string.IsNullOrEmpty(Model.Exception)) {
-		<div class="alert alert-danger" role="alert">
-				Error getting API details: @Model.Exception
-		</div>
-	}
-	<ul>
-		<li>Url: @Model.Url</li>
-		<li>Status Code: @Model.StatusCode</li>
-		<li>Server's reply: @if (Model.Response != null) {
-			@foreach (string res in Model.Response) {
-				@res
-			}
-		}</li>
-		<li>Cert: @Model.CertThumbprint @Model.CertSubject</li>
-		<li>Cert Error: @Model.CertError</li>
-	</ul>
+    @if (!string.IsNullOrEmpty(Model.Exception)) {
+        <div class="alert alert-danger" role="alert">
+                Error getting API details: @Model.Exception
+        </div>
+    }
+    <ul>
+        <li>Url: @Model.Url</li>
+        <li>Status Code: @Model.StatusCode</li>
+        <li>Server's reply: @if (Model.Response != null) {
+            @foreach (string res in Model.Response) {
+                @res
+            }
+        }</li>
+        <li>Cert: @Model.CertThumbprint @Model.CertSubject</li>
+        <li>Cert Error: @Model.CertError</li>
+    </ul>
 </div>

@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2-sdk-alpine as build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine as build
 
 WORKDIR /src
 COPY *.csproj .
@@ -8,8 +8,7 @@ COPY . .
 RUN dotnet publish -c Debug -o /dist
 
 
-
-FROM microsoft/dotnet:2.2-aspnetcore-runtime-alpine
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-alpine
 
 ENV ASPNETCORE_ENVIRONMENT Development
 ENV ASPNETCORE_URLS https://+:4001;http://+:4000

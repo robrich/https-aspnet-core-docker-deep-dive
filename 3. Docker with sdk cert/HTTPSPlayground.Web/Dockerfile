@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2-sdk-alpine as build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine as build
 
 # generate the dev cert if it doesn't already exist
 RUN dotnet dev-certs https
@@ -11,8 +11,7 @@ COPY . .
 RUN dotnet publish -c Debug -o /dist
 
 
-
-FROM microsoft/dotnet:2.2-aspnetcore-runtime-alpine
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-alpine
 
 COPY --from=build /root/.dotnet/corefx/cryptography /root/.dotnet/corefx/cryptography
 

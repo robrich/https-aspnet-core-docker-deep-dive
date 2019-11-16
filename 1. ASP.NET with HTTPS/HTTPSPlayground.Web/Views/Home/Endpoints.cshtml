@@ -1,46 +1,46 @@
 ﻿@model EndpointDetailsViewModel
 
 @{
-	ViewBag.Title = "Hack the Deets";
+    ViewBag.Title = "Hack the Deets";
 }
 
 <div class="text-center">
-	<h1 class="display-4">@ViewBag.Title</h1>
+    <h1 class="display-4">@ViewBag.Title</h1>
 </div>
 
 <div class="container" style="border: 1px solid #cccccc; padding: 1em; margin: 2em auto; max-width: 500px;">
-	@if (Model.NotKestrel) {
-		<div class="alert alert-danger" role="alert">
-			Can't get Kestrel details. Are you running in IIS Express?
-		</div>
-	}
-	@if (!string.IsNullOrEmpty(Model.Exception)) {
-		<div class="alert alert-danger" role="alert">
-			<p>
-				Error reflecting. <a href="https://github.com/aspnet/KestrelHttpServer/issues/2306#issuecomment-364478486" target="_blank" rel="noopener noreferrer">David Fouler</a> warned us about this.
-			</p>
-			<p>@Model.Exception</p>
-		</div>
-	}
-	<ul>
-		@foreach (EndpointDetail detail in Model.EndpointDetails) {
-			<li>
-				http@(detail.IsHttps ? "s" : "")://@(detail.Address?.Contains(":") ?? false ? "[" : "")@detail.Address@(detail.Address?.Contains(":") ?? false ? "]" : ""):@detail.Port @detail.Certificate?.Thumbprint @detail.Certificate?.Subject
-			</li>
-		}
-	</ul>
-	<p>IsDevCertLoaded: @Model.IsDevCertLoaded</p>
-	@if (Model.DefaultCertificate != null) {
-		<p class="clearfix">Default Certificate:</p>
-		<ul>
-			<li>Thumbprint: @Model.DefaultCertificate.Thumbprint</li>
-			<li>Subject: @Model.DefaultCertificate.Subject</li>
-			<li>Has Private Key: @Model.DefaultCertificate.HasPrivateKey</li>
-			<li>Issuer: @Model.DefaultCertificate.Issuer</li>
-			<li>NotBefore: @Model.DefaultCertificate.NotBefore</li>
-			<li>NotAfter: @Model.DefaultCertificate.NotAfter</li>
-			<li>SignatureAlgorithm: @Model.DefaultCertificate.SignatureAlgorithm</li>
-			<li>SerialNumber: @Model.DefaultCertificate.SerialNumber</li>
-		</ul>
-	}
+    @if (Model.NotKestrel) {
+        <div class="alert alert-danger" role="alert">
+            Can't get Kestrel details. Are you running in IIS Express?
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(Model.Exception)) {
+        <div class="alert alert-danger" role="alert">
+            <p>
+                Error reflecting. <a href="https://github.com/aspnet/KestrelHttpServer/issues/2306#issuecomment-364478486" target="_blank" rel="noopener noreferrer">David Fowler</a> warned us about this.
+            </p>
+            <p>@Model.Exception</p>
+        </div>
+    }
+    <ul>
+        @foreach (EndpointDetail detail in Model.EndpointDetails) {
+            <li>
+                http@(detail.IsHttps ? "s" : "")://@(detail.Address?.Contains(":") ?? false ? "[" : "")@detail.Address@(detail.Address?.Contains(":") ?? false ? "]" : ""):@detail.Port @detail.Certificate?.Thumbprint @detail.Certificate?.Subject
+            </li>
+        }
+    </ul>
+    <p>IsDevCertLoaded: @Model.IsDevCertLoaded</p>
+    @if (Model.DefaultCertificate != null) {
+        <p class="clearfix">Default Certificate:</p>
+        <ul>
+            <li>Thumbprint: @Model.DefaultCertificate.Thumbprint</li>
+            <li>Subject: @Model.DefaultCertificate.Subject</li>
+            <li>Has Private Key: @Model.DefaultCertificate.HasPrivateKey</li>
+            <li>Issuer: @Model.DefaultCertificate.Issuer</li>
+            <li>NotBefore: @Model.DefaultCertificate.NotBefore</li>
+            <li>NotAfter: @Model.DefaultCertificate.NotAfter</li>
+            <li>SignatureAlgorithm: @Model.DefaultCertificate.SignatureAlgorithm</li>
+            <li>SerialNumber: @Model.DefaultCertificate.SerialNumber</li>
+        </ul>
+    }
 </div>

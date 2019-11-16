@@ -20,8 +20,7 @@ RUN mkcert -install \
     && openssl pkcs12 -export -out https-api.pfx -inkey https-api.key -in https-api.pem -certfile rootCA.pem -passout pass:https-api
 
 
-
-FROM microsoft/dotnet:2.2-sdk-alpine as build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine as build
 
 WORKDIR /src
 COPY *.csproj .
@@ -32,8 +31,7 @@ COPY . .
 RUN dotnet publish -c Debug -o /dist
 
 
-
-FROM microsoft/dotnet:2.2-aspnetcore-runtime-alpine
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-alpine
 
 COPY --from=cert /bin/mkcert /bin/mkcert
 # root cert but not root private key:
