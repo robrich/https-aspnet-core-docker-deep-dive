@@ -1,5 +1,4 @@
 ﻿using HTTPSPlayground.Web.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,7 @@ using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace HTTPSPlayground.Web.Services
 {
@@ -40,7 +40,7 @@ namespace HTTPSPlayground.Web.Services
                 model.StatusCode = (int)response.StatusCode;
                 //TODO: in production code: response.EnsureSuccessStatusCode();
                 string body = await response.Content.ReadAsStringAsync();
-                model.Response = JsonConvert.DeserializeObject<List<string>>(body);
+                model.Response = JsonSerializer.Deserialize<List<string>>(body);
             } catch (/*HttpRequestException*/Exception ex) {
                 model.Exception = $"{ex.Message}, {ex.InnerException?.Message}";
             }
