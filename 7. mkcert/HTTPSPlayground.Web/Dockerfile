@@ -16,11 +16,11 @@ COPY rootCA*.pem /root/.local/share/mkcert/
 # make a pfx with known password by making a pem/key then converting it
 # includes minikube and docker ips
 RUN mkcert -install \
-    && mkcert -key-file https-web.key -cert-file https-web.pem minikube 192.168.184.148 localhost 127.0.0.1 web \
+    && mkcert -key-file https-web.key -cert-file https-web.pem minikube 192.168.184.134 localhost 127.0.0.1 web \
     && openssl pkcs12 -export -out https-web.pfx -inkey https-web.key -in https-web.pem -certfile rootCA.pem -passout pass:https-web
 
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine as build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine as build
 
 WORKDIR /src
 COPY *.csproj .
@@ -31,7 +31,7 @@ COPY . .
 RUN dotnet publish -c Debug -o /dist
 
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-alpine
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine
 
 COPY --from=cert /bin/mkcert /bin/mkcert
 # root cert but not root private key:
